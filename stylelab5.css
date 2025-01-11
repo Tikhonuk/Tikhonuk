@@ -1,0 +1,131 @@
+
+.ruslan-display-regular {
+  font-family: "Ruslan Display", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+body {background-color: rgb(245, 222, 179)}
+h1{color: red;
+  text-align: center;
+  font-family: 'Ruslan Display', sans-serif;
+  font-size: 50px; 
+  margin-top: 50px;
+  box-sizing: border-box;
+}
+p {
+margin-left: 20px; 
+color:black;
+font-size: 20px;
+text-indent: 20px;
+line-height: 1.5;
+box-sizing: border-box;
+padding: 0.5em;
+}
+a {
+color:black;
+text-decoration: none; 
+font-size: 2 rem;
+box-sizing: border-box;
+}
+img{
+border-radius: 10px; 
+margin-bottom: 10px; 
+margin-top: 10px;
+margin-left: 70px;
+box-sizing: border-box;
+max-height:270px;
+max-width: 420px;
+min-height: 240px;
+min-width: 380px
+}
+hr {
+border: 2px solid black; 
+}
+h2{color: red;
+text-align: center;
+font-family: 'Ruslan Display', sans-serif;
+font-size: 40px; 
+margin-top: 50px;
+box-sizing: border-box;
+}
+.meal{
+color: red;
+  text-align: center;
+  font-family: 'Ruslan Display', sans-serif;
+  font-size: 50px; 
+  margin-top: 50px
+}
+.hr1 {
+border: 1px solid black; 
+}
+.per{
+color: red;
+
+font-family: 'Ruslan Display', sans-serif;
+font-size: 30px; 
+margin-left: 40px
+}
+
+ol{
+  font-size: 20px;
+}
+
+.img1{
+  margin-left: 30px;
+  position: static;
+  border: 3px solid black;
+  
+  }
+.img2{
+  position: relative;
+  top: 170px;
+  left: -17%;
+  z-index: 200;
+  border: 3px solid red;
+}
+.img3{
+  position: absolute;
+  left: 500px;
+  z-index: 100;
+  border: 3px solid #000000;
+}
+.img4{
+  position:relative;
+  left: 780px;
+  bottom: 120px;
+  z-index: 200;
+  border: 3px solid rgba(255, 0, 0, 0.774);
+}
+
+section{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 50px;
+}
+  
+
+
+.card{
+  width: 25%;
+  border: 3px solid red;
+  background-color: antiquewhite;
+  font-size: 20px;
+  padding: 0.5em;
+  flex:auto;  
+
+}
+
+.horizontal-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px; 
+}
+
+.horizontal-images img {
+  border: 5px solid red; 
+  border-radius: 10px; 
+  padding: 5px; 
+
+}
