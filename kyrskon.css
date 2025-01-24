@@ -1,0 +1,240 @@
+
+body {
+  background-color: #5e1d80; 
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('neirons.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-attachment: fixed;
+}
+
+
+main {
+  background-color: rgb(18, 10, 160); 
+  width: 60%; 
+  margin: 20px auto; 
+  padding: 20px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px; 
+  box-sizing: border-box; 
+  margin-top: 150px;
+  border: 2px solid black ;
+}
+
+
+main h2 {
+  text-align: center;
+  color: white;
+  margin-top: 0; 
+  font-family: 'Ruslan Display', cursive; 
+    font-size: 40px;
+}
+
+header {
+  background-color: rgba(25, 5, 114, 1); 
+  padding: 20px;
+  text-align: center;
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  z-index: 1000; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  
+}
+
+header h1 {
+  font-family: 'Ruslan Display', cursive;
+  font-size: 3em;
+  color: #0c92b4; 
+  margin: 0;
+}
+
+
+nav {
+  background-color: #0c92b4; 
+  padding: 5px 0;
+  border-radius: 15px;
+  margin-top: 10px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  
+  
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 12px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: text-decoration 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+
+footer {
+  background-color: rgba(25, 5, 114, 1); 
+  padding: 10px;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+
+}
+
+footer p {
+  color: #098692; 
+  margin: 0;
+}
+
+.task-container {
+  width: 60%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f4f4f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 2px solid black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-container:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.task {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.answer-btn {
+  position: relative;
+  padding: 15px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #0c92b4; 
+  color: white; 
+  border-radius: 5px;
+  overflow: hidden;
+  transition: background-color 0.3s; 
+  width: 200px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.answer-btn:hover {
+  background-color: #0f0d90; 
+  transform: scale(1.1);
+}
+
+.hover-text {
+  display: none; 
+}
+
+.answer-btn:hover .default-text {
+  display: none; 
+}
+
+.answer-btn:hover .hover-text {
+  display: inline; 
+}
+
+.vesi{
+  height: 200px;
+  width: 200px;
+
+}
+
+.chess{
+    height: 400px;
+    width: 400px;
+    border: 2px solid black;
+}
+
+
+
+.card {
+    display: flex;
+    align-items: flex-start; 
+    justify-content: flex-start; 
+    width: 80%;
+    margin: 20px auto; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-image-wrapper {
+    flex: 1;
+    max-width: 50%; 
+    height: auto; 
+}
+
+.card-image {
+    width: 50%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.card-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+}
+
+.card-content h3 {
+    font-family: 'Ruslan Display', cursive;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.button-link {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #6200ea; /* Фон кнопки */
+    color: #fff; /* Цвет текста */
+    padding: 15px 30px; /* Увеличена высота и ширина кнопки */
+    border: 2px solid #000; /* Чёрная окантовка */
+    border-radius: 8px; /* Закруглённые углы */
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em; /* Увеличенный размер текста */
+    text-align: center;
+    margin-top: 30px; /* Больше отступ сверху для опускания кнопки */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Анимация при наведении */
+}
+
+.button-link:hover {
+    background-color: #3700b3; /* Более тёмный фон при наведении */
+    transform: translateY(-3px); /* Лёгкий "подъём" кнопки */
+}
