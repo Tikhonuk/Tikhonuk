@@ -1,0 +1,130 @@
+body {
+    background-color: #5e1d80; 
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('neirons.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed;
+}
+  
+  
+main {
+    background-color: rgb(18, 10, 160); 
+    width: 60%; 
+    margin: 20px auto; 
+    padding: 20px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px; 
+    box-sizing: border-box; 
+    margin-top: 150px;
+    border: 2px solid black ;
+}
+  
+  
+main h2 {
+    text-align: center;
+    color: white;
+    margin-top: 0; 
+    font-family: 'Ruslan Display', cursive; 
+      font-size: 40px;
+}
+  
+header {
+    background-color: rgba(25, 5, 114, 1); 
+    padding: 20px;
+    text-align: center;
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    
+}
+  
+header h1 {
+    font-family: 'Ruslan Display', cursive;
+    font-size: 3em;
+    color: #0c92b4; 
+    margin: 0;
+}
+  
+footer {
+    background-color: rgba(25, 5, 114, 1); 
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+  
+}
+  
+footer p {
+    color: #098692; 
+    margin: 0;
+}
+
+header  a {
+    text-decoration: none; 
+    font-family: 'Ruslan Display', cursive;
+    font-size: 3em;
+    color: #0c92b4; 
+    margin: 0;
+}
+
+header a:hover {
+    color: #0c92b4; 
+}
+
+.asd{
+    text-align: center;
+    color: white;
+    font-family: 'Ruslan Display', cursive; 
+    font-size: 3.5em; 
+    margin-top: 10px
+}
+
+.zagreg {
+    text-align: center; 
+    color: white; 
+    font-family: 'Roboto', sans-serif; 
+    font-size: 2em; 
+    margin-top: 20px; 
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    border: 2x solid black;
+}
+
+form input {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #0c92b4;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    
+}
+
+form button:hover {
+    background-color: #0a7f98;
+}
