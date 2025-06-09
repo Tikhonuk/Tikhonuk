@@ -8,8 +8,6 @@
 
     <!-- Bootstrap CSS (CDN) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Ваш кастомный CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 <body>
@@ -17,10 +15,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
   <div class="container">
     <a class="navbar-brand" href="{% url 'catalog:home' %}">Музыкальный каталог</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
-      <span class="navbar-toggler-icon"></span>
-    </button>
   </div>
 </nav>
 
@@ -30,7 +24,6 @@
     <div class="row">
         <div class="col-md-8">
 
-            <!-- Информация о композиции -->
             <ul class="list-group mb-4">
                 <li class="list-group-item"><strong>Исполнитель:</strong> {{ composition.album.artist.name }}</li>
                 <li class="list-group-item"><strong>Альбом:</strong> {{ composition.album.title }}</li>
@@ -39,7 +32,6 @@
                 <li class="list-group-item"><strong>Добавлено в избранное:</strong> {{ favorites_count }} раз(а)</li>
             </ul>
 
-            <!-- Проигрыватель -->
             {% if composition.audio_file %}
             <audio controls class="w-100 mb-4">
                 <source src="{{ composition.audio_file.url }}" type="audio/mpeg" />
@@ -49,18 +41,16 @@
             <p class="text-muted">Аудиофайл отсутствует.</p>
             {% endif %}
 
-            <!-- Кнопки действий -->
             <div class="mb-4">
-                <a href="{% url 'catalog:composition_edit' composition.pk %}" class="btn btn-primary me-2">Редактировать</a>
+                <a href="{% url 'catalog:composition_edit' composition.pk %}?next={{ request.get_full_path|urlencode }}" class="btn btn-primary me-2">Редактировать</a>
                 <a href="{% url 'catalog:composition_delete' composition.pk %}" class="btn btn-danger me-2">Удалить</a>
-                <a href="{% url 'catalog:composition_add' %}" class="btn btn-success">Добавить новую композицию</a>
+                <a href="{% url 'catalog:composition_add' %}?next={{ request.get_full_path|urlencode }}" class="btn btn-success">Добавить новую композицию</a>
             </div>
 
         </div>
     </div>
 </div>
 
-<!-- Bootstrap JS (CDN) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

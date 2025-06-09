@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Count
+from django.utils.http import url_has_allowed_host_and_scheme
 from .models import Composition, Genre
 from .forms import CompositionForm
 import random
@@ -59,7 +60,7 @@ def home(request):
 def composition_detail(request, pk):
     composition = get_object_or_404(
         Composition.objects
-        .select_related('album__artist', 'genre')  # чтобы подтянуть альбом и исполнителя и жанр за 1 запрос
+        .select_related('album__artist', 'genre')
         .annotate(favorites_count=Count('favorites')),
         pk=pk
     )
@@ -71,26 +72,42 @@ def composition_detail(request, pk):
 
 
 def composition_add(request):
+    next_url = request.GET.get('next', '')
     if request.method == 'POST':
+        next_url = request.POST.get('next', '')
         form = CompositionForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                return redirect(next_url)
             return redirect('catalog:home')
     else:
         form = CompositionForm()
-    return render(request, 'catalog/composition_form.html', {'form': form, 'title': 'Добавить композицию'})
+    return render(request, 'catalog/composition_form.html', {
+        'form': form,
+        'title': 'Добавить композицию',
+        'next': next_url,
+    })
 
 
 def composition_edit(request, pk):
     composition = get_object_or_404(Composition, pk=pk)
+    next_url = request.GET.get('next', '')
     if request.method == 'POST':
+        next_url = request.POST.get('next', '')
         form = CompositionForm(request.POST, request.FILES, instance=composition)
         if form.is_valid():
             form.save()
+            if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                return redirect(next_url)
             return redirect('catalog:composition_detail', pk=composition.pk)
     else:
         form = CompositionForm(instance=composition)
-    return render(request, 'catalog/composition_form.html', {'form': form, 'title': 'Редактировать композицию'})
+    return render(request, 'catalog/composition_form.html', {
+        'form': form,
+        'title': 'Редактировать композицию',
+        'next': next_url,
+    })
 
 
 def composition_delete(request, pk):
