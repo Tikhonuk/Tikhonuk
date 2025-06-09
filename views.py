@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Count
-from .models import Composition, UserFavorites, Genre
-from .forms import CompositionForm  # позже сделаем форму
+from .models import Composition, Genre
+from .forms import CompositionForm
 import random
 
 def home(request):
@@ -57,9 +57,15 @@ def home(request):
 
 
 def composition_detail(request, pk):
-    composition = get_object_or_404(Composition, pk=pk)
+    composition = get_object_or_404(
+        Composition.objects
+        .select_related('album__artist', 'genre')  # чтобы подтянуть альбом и исполнителя и жанр за 1 запрос
+        .annotate(favorites_count=Count('favorites')),
+        pk=pk
+    )
     context = {
-        'composition': composition
+        'composition': composition,
+        'favorites_count': composition.favorites_count,
     }
     return render(request, 'catalog/composition_detail.html', context)
 

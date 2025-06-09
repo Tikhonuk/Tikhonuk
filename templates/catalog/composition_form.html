@@ -1,24 +1,28 @@
-<!DOCTYPE html>
+
+{% load static %}<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'catalog/styles.css' %}">
 </head>
 <body>
     <header>
+        <h1>{{ title }}</h1>
         <nav>
             <a href="{% url 'catalog:home' %}">Главная</a>
+            {% if form.instance.pk %}
+                | <a href="{% url 'catalog:composition_detail' pk=form.instance.pk %}">Назад к композиции</a>
+            {% endif %}
         </nav>
     </header>
 
-    <h1>{{ title }}</h1>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Сохранить</button>
-    </form>
-
-    <p><a href="{% url 'catalog:home' %}">Вернуться на главную</a></p>
+    <section>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Сохранить</button>
+        </form>
+    </section>
 </body>
 </html>

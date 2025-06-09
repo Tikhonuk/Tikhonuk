@@ -1,25 +1,56 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <title>{{ composition.title }}</title>
+    <title>{{ composition.title }} — Детали</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="{% url 'catalog:home' %}">Главная</a>
-        </nav>
-    </header>
 
     <h1>{{ composition.title }}</h1>
-    <p><strong>Автор:</strong> {{ composition.author }}</p>
-    <p><strong>Жанр:</strong> {{ composition.genre.name }}</p>
-    <p><strong>Описание:</strong> {{ composition.description }}</p>
 
-    <div>
+    <p><strong>Альбом:</strong> {{ composition.album.title }}</p>
+
+    <p><strong>Исполнитель:</strong>
+        {% if composition.album.artist %}
+            {{ composition.album.artist.name }}
+        {% else %}
+            Неизвестен
+        {% endif %}
+    </p>
+
+    <p><strong>Жанр:</strong>
+        {% if composition.genre %}
+            {{ composition.genre.name }}
+        {% else %}
+            Не указан
+        {% endif %}
+    </p>
+
+    <p><strong>Длительность:</strong> {{ composition.duration }}</p>
+
+    <p><strong>В избранных у:</strong> {{ favorites_count }} пользователя(ей)</p>
+
+    {% if composition.audio_file %}
+        <audio controls>
+            <source src="{{ composition.audio_file.url }}" type="audio/mpeg" />
+            Ваш браузер не поддерживает аудио элемент.
+        </audio>
+    {% else %}
+        <p>Аудиофайл отсутствует.</p>
+    {% endif %}
+
+    <hr/>
+
+    <!-- Кнопки -->
+    <p>
         <a href="{% url 'catalog:composition_edit' composition.pk %}">Редактировать</a> |
         <a href="{% url 'catalog:composition_delete' composition.pk %}">Удалить</a> |
-        <a href="{% url 'catalog:composition_add' %}">Добавить новую композицию</a>
-    </div>
+        <a href="{% url 'catalog:composition_add' %}">Добавить новую композицию</a> |
+        <a href="{% url 'catalog:home' %}">На главную</a>
+    </p>
+
 </body>
 </html>

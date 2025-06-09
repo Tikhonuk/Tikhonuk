@@ -1,22 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <title>Удалить композицию</title>
+    <title>Удаление композиции</title>
+    <link rel="stylesheet" href="{% static 'catalog/styles.css' %}">
 </head>
 <body>
     <header>
+        <h1>Удалить композицию "{{ composition.title }}"?</h1>
         <nav>
-            <a href="{% url 'catalog:home' %}">Главная</a>
+            <a href="{% url 'catalog:home' %}">Главная</a> |
+            <a href="{% url 'catalog:composition_detail' pk=composition.pk %}">Отмена</a>
         </nav>
     </header>
 
-    <h1>Удалить композицию: {{ composition.title }}?</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Подтвердить удаление</button>
-        <a href="{% url 'catalog:composition_detail' composition.pk %}">Отмена</a>
-    </form>
+    <section>
+        <form method="post">
+            {% csrf_token %}
+            <p>Вы уверены, что хотите удалить эту композицию?</p>
+            <button type="submit">Да, удалить</button>
+            <a href="{% url 'catalog:composition_detail' pk=composition.pk %}">Нет, вернуть назад</a>
+        </form>
+    </section>
 </body>
 </html>
