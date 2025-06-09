@@ -1,13 +1,22 @@
-{% extends 'catalog/base.html' %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Удалить композицию</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'catalog:home' %}">Главная</a>
+        </nav>
+    </header>
 
-{% block content %}
-    <h1>Удалить композицию</h1>
-    <p>Вы уверены, что хотите удалить композицию "{{ composition.title }}"?</p>
+    <h1>Удалить композицию: {{ composition.title }}?</h1>
 
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Да, удалить</button>
+        <button type="submit">Подтвердить удаление</button>
+        <a href="{% url 'catalog:composition_detail' composition.pk %}">Отмена</a>
     </form>
-
-    <p><a href="{% url 'catalog:composition_detail' composition.pk %}">Отмена</a></p>
-{% endblock %}
+</body>
+</html>

@@ -1,23 +1,25 @@
-{% extends 'catalog/base.html' %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ composition.title }}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'catalog:home' %}">Главная</a>
+        </nav>
+    </header>
 
-{% block content %}
     <h1>{{ composition.title }}</h1>
-    <p><strong>Альбом:</strong> {{ composition.album }}</p>
-    <p><strong>Жанр:</strong> {{ composition.genre }}</p>
-    <p><strong>Длительность:</strong> {{ composition.duration }}</p>
-    <p><strong>Дата добавления:</strong> {{ composition.created_at }}</p>
+    <p><strong>Автор:</strong> {{ composition.author }}</p>
+    <p><strong>Жанр:</strong> {{ composition.genre.name }}</p>
+    <p><strong>Описание:</strong> {{ composition.description }}</p>
 
-    {% if composition.audio_file %}
-        <p><strong>Аудиофайл:</strong></p>
-        <audio controls>
-            <source src="{{ composition.audio_file.url }}" type="audio/mpeg">
-            Ваш браузер не поддерживает аудиоплеер.
-        </audio>
-    {% endif %}
-
-    <p>
+    <div>
         <a href="{% url 'catalog:composition_edit' composition.pk %}">Редактировать</a> |
         <a href="{% url 'catalog:composition_delete' composition.pk %}">Удалить</a> |
-        <a href="{% url 'catalog:home' %}">Назад к главной</a>
-    </p>
-{% endblock %}
+        <a href="{% url 'catalog:composition_add' %}">Добавить новую композицию</a>
+    </div>
+</body>
+</html>

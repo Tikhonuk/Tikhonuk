@@ -1,13 +1,17 @@
-{% extends 'catalog/base.html' %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'catalog:home' %}">Главная</a>
+        </nav>
+    </header>
 
-{% block content %}
-    <h1>
-        {% if form.instance.pk %}
-            Редактировать композицию
-        {% else %}
-            Добавить новую композицию
-        {% endif %}
-    </h1>
+    <h1>{{ title }}</h1>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -15,5 +19,6 @@
         <button type="submit">Сохранить</button>
     </form>
 
-    <p><a href="{% url 'catalog:home' %}">Назад к главной</a></p>
-{% endblock %}
+    <p><a href="{% url 'catalog:home' %}">Вернуться на главную</a></p>
+</body>
+</html>
