@@ -52,7 +52,7 @@
 
     <!-- Форма поиска -->
     <section id="search-form" class="mb-4">
-        <form method="get" action="{% url 'home' %}">
+        <form method="get" action="{% url 'catalog:home' %}">
             <div class="input-group">
                 <input 
                     type="text" 
@@ -75,7 +75,7 @@
             <ol class="list-group list-group-numbered">
                 {% for composition in all_compositions %}
                 <li class="list-group-item d-flex align-items-center justify-content-between">
-                    <a href="{% url 'composition_detail' composition.pk %}">{{ composition.title }}</a>
+                    <a href="{% url 'catalog:composition_detail' composition.pk %}">{{ composition.title }}</a>
                     {% if composition.audio_file %}
                         <audio controls preload="none">
                             <source src="{{ composition.audio_file.url }}" type="audio/mpeg" />
@@ -97,7 +97,7 @@
         <ol class="list-group list-group-numbered">
             {% for composition in latest_compositions %}
             <li class="list-group-item d-flex align-items-center justify-content-between">
-                <a href="{% url 'composition_detail' composition.pk %}">{{ composition.title }}</a>
+                <a href="{% url 'catalog:composition_detail' composition.pk %}">{{ composition.title }}</a>
                 <div class="d-flex align-items-center gap-3">
                     {% if composition.audio_file %}
                         <audio controls preload="none">
@@ -120,7 +120,7 @@
         <ol class="list-group list-group-numbered">
             {% for composition in popular_compositions %}
             <li class="list-group-item d-flex align-items-center justify-content-between">
-                <a href="{% url 'composition_detail' composition.pk %}">{{ composition.title }}</a>
+                <a href="{% url 'catalog:composition_detail' composition.pk %}">{{ composition.title }}</a>
                 <div class="d-flex align-items-center gap-3">
                     {% if composition.audio_file %}
                         <audio controls preload="none">
@@ -141,7 +141,7 @@
     <section id="random-compositions">
         <div class="d-flex justify-content-between align-items-center mb-2">
             <h2>Случайные композиции</h2>
-            <form method="get" action="{% url 'home' %}" id="refresh-random-form">
+            <form method="get" action="{% url 'catalog:home' %}" id="refresh-random-form">
                 {% if search_query %}
                 <input type="hidden" name="q" value="{{ search_query }}">
                 {% endif %}
@@ -154,7 +154,7 @@
         <ol class="list-group list-group-numbered">
             {% for composition in random_compositions %}
             <li class="list-group-item d-flex align-items-center justify-content-between">
-                <a href="{% url 'composition_detail' composition.pk %}">{{ composition.title }}</a>
+                <a href="{% url 'catalog:composition_detail' composition.pk %}">{{ composition.title }}</a>
                 {% if composition.audio_file %}
                     <audio controls preload="none">
                         <source src="{{ composition.audio_file.url }}" type="audio/mpeg" />

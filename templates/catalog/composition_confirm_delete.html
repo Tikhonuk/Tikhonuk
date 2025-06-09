@@ -1,0 +1,13 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    <h1>Удалить композицию</h1>
+    <p>Вы уверены, что хотите удалить композицию "{{ composition.title }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Да, удалить</button>
+    </form>
+
+    <p><a href="{% url 'catalog:composition_detail' composition.pk %}">Отмена</a></p>
+{% endblock %}
