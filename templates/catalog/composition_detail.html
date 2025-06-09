@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ composition.title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+
+    <h1 class="mb-4">{{ composition.title }}</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Основная информация</h5>
+            
+            {% if composition.album %}
+                <p class="card-text"><strong>Альбом:</strong> {{ composition.album.title }}</p>
+            {% else %}
+                <p class="card-text"><strong>Альбом:</strong> Не указан</p>
+            {% endif %}
+
+            {% if composition.artist %}
+                <p class="card-text"><strong>Исполнитель:</strong> {{ composition.artist.name }}</p>
+            {% else %}
+                <p class="card-text"><strong>Исполнитель:</strong> Не указан</p>
+            {% endif %}
+
+            <p class="card-text"><strong>Жанр:</strong> {{ composition.genre.name }}</p>
+
+            <p class="card-text"><strong>Дата релиза:</strong> {{ composition.release_date }}</p>
+
+            {% if composition.audio_file %}
+                <p class="card-text"><strong>Прослушать:</strong></p>
+                <audio controls class="w-100 mb-3">
+                    <source src="{{ composition.audio_file.url }}" type="audio/mpeg">
+                    Ваш браузер не поддерживает воспроизведение аудио.
+                </audio>
+            {% else %}
+                <p class="card-text">Аудиофайл не загружен.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Кнопки управления -->
+    <div class="mb-4">
+        <a href="{% url 'edit_composition' composition.pk %}" class="btn btn-warning me-2">Редактировать</a>
+        <a href="{% url 'delete_composition' composition.pk %}" class="btn btn-danger me-2">Удалить</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary">← На главную</a>
+    </div>
+
+</body>
+</html>

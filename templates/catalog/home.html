@@ -1,0 +1,187 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Музыкальный каталог</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        section {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .list-group-item {
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        audio {
+            max-width: 180px;
+            height: 32px;
+        }
+        .btn-refresh {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body class="container py-4">
+
+    <!-- Шапка с меню -->
+    <header class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <h1 class="mb-2 mb-md-0">Музыкальный каталог</h1>
+        <nav class="nav">
+            <a class="nav-link" href="#search-form">Поиск</a>
+            <a class="nav-link" href="#latest-compositions">Новые</a>
+            <a class="nav-link" href="#popular-compositions">Популярные</a>
+            <a class="nav-link" href="#random-compositions">Случайные</a>
+        </nav>
+    </header>
+
+    <!-- Форма поиска -->
+    <section id="search-form" class="mb-4">
+        <form method="get" action="{% url 'home' %}">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    name="q" 
+                    class="form-control" 
+                    placeholder="🔍 Поиск композиций..." 
+                    value="{{ search_query|default:'' }}" 
+                    autocomplete="off"
+                />
+                <button class="btn btn-primary" type="submit">Найти</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Результаты поиска -->
+    {% if search_query %}
+    <section>
+        <h2>Результаты поиска: "{{ search_query }}"</h2>
+        {% if all_compositions %}
+            <ol class="list-group list-group-numbered">
+                {% for composition in all_compositions %}
+                <li class="list-group-item d-flex align-items-center justify-content-between">
+                    <a href="{% url 'composition_detail' composition.pk %}">{{ composition.title }}</a>
+                    {% if composition.audio_file %}
+                        <audio controls preload="none">
+                            <source src="{{ composition.audio_file.url }}" type="audio/mpeg" />
+                            Ваш браузер не поддерживает аудио.
+                        </audio>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p>По вашему запросу ничего не найдено.</p>
+        {% endif %}
+    </section>
+    {% endif %}
+
+    <!-- Новые композиции -->
+    <section id="latest-compositions">
+        <h2>Новые композиции</h2>
+        <ol class="list-group list-group-numbered">
+            {% for composition in latest_compositions %}
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <a href="{% url 'composition_detail' composition.pk %}">{{ composition.title }}</a>
+                <div class="d-flex align-items-center gap-3">
+                    {% if composition.audio_file %}
+                        <audio controls preload="none">
+                            <source src="{{ composition.audio_file.url }}" type="audio/mpeg" />
+                            Ваш браузер не поддерживает аудио.
+                        </audio>
+                    {% endif %}
+                    <span class="text-muted">{{ composition.release_date }}</span>
+                </div>
+            </li>
+            {% empty %}
+            <li class="list-group-item">Нет новых композиций.</li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <!-- Популярные композиции -->
+    <section id="popular-compositions">
+        <h2>Популярные композиции</h2>
+        <ol class="list-group list-group-numbered">
+            {% for composition in popular_compositions %}
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <a href="{% url 'composition_detail' composition.pk %}">{{ composition.title }}</a>
+                <div class="d-flex align-items-center gap-3">
+                    {% if composition.audio_file %}
+                        <audio controls preload="none">
+                            <source src="{{ composition.audio_file.url }}" type="audio/mpeg" />
+                            Ваш браузер не поддерживает аудио.
+                        </audio>
+                    {% endif %}
+                    <span class="text-muted">❤ {{ composition.favorites_count }}</span>
+                </div>
+            </li>
+            {% empty %}
+            <li class="list-group-item">Нет популярных композиций.</li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <!-- Случайные композиции -->
+    <section id="random-compositions">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h2>Случайные композиции</h2>
+            <form method="get" action="{% url 'home' %}" id="refresh-random-form">
+                {% if search_query %}
+                <input type="hidden" name="q" value="{{ search_query }}">
+                {% endif %}
+                <input type="hidden" name="refresh_random" value="1">
+                <button class="btn btn-outline-secondary btn-sm btn-refresh" type="submit" title="Обновить случайные композиции">
+                    &#x21bb; Обновить
+                </button>
+            </form>
+        </div>
+        <ol class="list-group list-group-numbered">
+            {% for composition in random_compositions %}
+            <li class="list-group-item d-flex align-items-center justify-content-between">
+                <a href="{% url 'composition_detail' composition.pk %}">{{ composition.title }}</a>
+                {% if composition.audio_file %}
+                    <audio controls preload="none">
+                        <source src="{{ composition.audio_file.url }}" type="audio/mpeg" />
+                        Ваш браузер не поддерживает аудио.
+                    </audio>
+                {% endif %}
+            </li>
+            {% empty %}
+            <li class="list-group-item">Нет случайных композиций.</li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="text-center mt-5 mb-3 text-muted">
+        &copy; 2025 Музыкальный каталог
+    </footer>
+
+    <!-- Скрипт для прокрутки на блок случайных -->
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('refresh_random')) {
+                window.location.hash = 'random-compositions';
+            }
+        });
+    </script>
+
+</body>
+</html>
